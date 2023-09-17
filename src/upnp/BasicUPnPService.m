@@ -141,6 +141,29 @@
     return ret;
 }
 
+- (NSUInteger)addObservr:(BasicUPnPServiceObserver *)obs {
+    NSUInteger ret = 0;
+
+//    NSLog(@"[UPnP-Observers] added observer");
+    [mMutex lock];
+    [mObservers addObject:obs];
+    ret = [mObservers count];
+    [mMutex unlock];
+
+    return ret;
+}
+
+- (NSUInteger)removeObservr:(BasicUPnPServiceObserver *)obs {
+    NSUInteger ret = 0;
+//    NSLog(@"[UPnP-Observers] removed observer");
+    [mMutex lock];
+    [mObservers removeObject:obs];
+    ret = [mObservers count];
+    [mMutex unlock];
+
+    return ret;
+}
+
 - (BOOL)isObserver:(BasicUPnPServiceObserver *)obs {
     BOOL ret = NO;
     
